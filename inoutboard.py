@@ -25,7 +25,7 @@ keyDat.close()                      #Close keydat file
 names = list(devices.keys())        #Create an ordered list of names
 ids = list(devices.values())        #Create an ordered list of IDs 
 
-
+'''
 #CL GUI definition
 def main(stdscr):
     curses.init_pair(1,curses.COLOR_RED,curses.COLOR_BLACK)
@@ -48,14 +48,25 @@ def main(stdscr):
 #        time.sleep(30)
 curses.wrapper(main)
 '''
+
 while True:
         NumDevices=len(names)
-        print("In/Out Board")
-        print("Last checked on " + time.strftime("%a, %d %b %Y %H:%M:%S local time.", time.localtime()))
+        printlist=["fill"]*NumDevices
+        print("In/Out Board \n Last checked on " + time.strftime("%a, %d %b %Y %H:%M:%S local time.", time.localtime()))
         for jj in range (0,NumDevices):
             result = bluetooth.lookup_name(ids[jj], timeout=5)
             if (result != None):
-                print("%s is: in" %(names[jj]))
+                printlist[jj]=("%s is: in" %(names[jj]))
             else:
-                print("%s is: out" %(names[jj]))
-'''
+                printlist[jj]=("%s is: out" %(names[jj]))
+        
+        for ii in printlist:
+            print ii
+
+        print "\r \r \r \r"
+
+
+
+
+
+
